@@ -34,12 +34,14 @@ func countingValleys(path string) int32 {
 
 	for i, l := 0, len(path); i < l; i++ {
 		if path[i] == 'D' {
-			if lvl == 0 {
-				seaLvlCounter++
-			}
-			lvl -= 1
-		} else if path[i] == 'U' {
-			lvl += 1
+			lvl--
+		} else {
+			lvl++
+		}
+
+		//We came up to sea lvl
+		if lvl == 0 && path[i] == 'U' {
+			seaLvlCounter++
 		}
 	}
 
