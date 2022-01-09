@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"sort"
 	"testing"
 )
 
@@ -27,38 +28,34 @@ func TestPickingNumbers(t *testing.T) {
 
 func pickingNumbers(a []int32) int32 {
 	var (
-		max = 1
-		arr []int32
+		res        int32 = 0
+		maxDiffNum int32 = 1
 	)
 
-	for i, l := 0, len(a); i < l; i++ {
-		arr = make([]int32, 0)
-		arr = append(arr, a[i])
+	sort.Slice(a, func(i, j int) bool {
+		return a[i] < a[j]
+	})
 
-		for j := 0; j < l; j++ {
-			if i == j {
-				continue
+	for i, l := 0, len(a); i < l; i++ {
+		for j := i + 1; j < l; j++ {
+			if a[j]-a[i] > maxDiffNum {
+				break
 			}
-			if isDiffRange(arr, a[j]) {
-				arr = append(arr, a[j])
-			}
-		}
-		if max < len(arr) {
-			max = len(arr)
+			res = max(res, int32(j-i+1))
 		}
 	}
 
-	return int32(max)
+	return res
 }
 
-func isDiffRange(arr []int32, num int32) bool {
-	diffMaxCount := 1
+func max(nums ...int32) int32 {
+	max := nums[0]
 
-	for i := range arr {
-		if abs(arr[i]-num) > diffMaxCount {
-			return false
+	for i, l := 1, len(nums); i < l; i++ {
+		if nums[i] > max {
+			max = nums[i]
 		}
 	}
 
-	return true
+	return max
 }
