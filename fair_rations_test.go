@@ -28,19 +28,22 @@ func TestFairRations(t *testing.T) {
 }
 
 func fairRations(B []int32) string {
-	var c int
+	var (
+		c int
+		l = len(B) - 1
+	)
 
-	for i, l := 0, len(B)-1; i < l; i++ {
+	for i := 0; i < l; i++ {
 		if B[i]%2 == 1 {
 			B[i]++
 			B[i+1]++
-			c++
-		}
-
-		if i+1 == l && B[i+1]%2 == 1 {
-			return "NO"
+			c += 2
 		}
 	}
 
-	return strconv.Itoa(c * 2)
+	if B[l]%2 == 1 {
+		return "NO"
+	}
+
+	return strconv.Itoa(c)
 }
