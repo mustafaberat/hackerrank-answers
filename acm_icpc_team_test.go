@@ -22,17 +22,19 @@ func TestAcmTeam(t *testing.T) {
 
 func acmTeam(topic []string) []int32 {
 	var (
-		maxTopicCount int32 = 0
-		maxTeamCount  int32 = 0
-		l                   = len(topic)
+		maxTopicCount      int32 = 0
+		maxTeamCount int32 = 0
+		andOpRes     int32
+		l            = len(topic)
 	)
 
 	for i := 0; i < l-1; i++ {
 		for j := i + 1; j < l; j++ {
-			if andOperation(topic[i], topic[j]) > maxTopicCount {
-				maxTopicCount = andOperation(topic[i], topic[j])
+			andOpRes = andOperation(topic[i], topic[j])
+			if andOpRes > maxTopicCount {
+				maxTopicCount = andOpRes
 				maxTeamCount = 1
-			} else if andOperation(topic[i], topic[j]) == maxTopicCount {
+			} else if andOpRes == maxTopicCount {
 				maxTeamCount++
 			}
 		}
