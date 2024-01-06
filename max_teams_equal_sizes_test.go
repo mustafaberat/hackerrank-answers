@@ -1,3 +1,18 @@
+// 1. Hackathon at HackerRank
+// HackerRank is organizing a hackathon for all its employees.
+// A hackathon is a team event, and there are n teams taking part. The number of employees in the ith team is denoted by teamSize[i]. In order to maintain uniformity, the team size of at most k teams can be
+// reduced. Find the maximum number of teams of equal size that can be formed if team size is reduced optimally.
+// Example
+// There are n = 5 teams, team sizes are teamSize = [1, 2, 2, 3, 4], and the maximum number of teams whose size can be reduced, k = 2.
+// The team size of the last 2 teams can be reduced to 2, thus teamSize = [1, 2, 2, 2, 2]. The maximum number of teams with equal size is 4.
+// Function Description
+// Complete the function equalizeTeamSize in the editor below.
+// equalize TeamSize has the following parameters:
+// int teamSize[n]: the number of employees in each team
+// int k: the maximum number of teams whose size can be reduced
+// Returns
+// int: the maximum number of equal size teams possible
+
 package algorithms
 
 import (
