@@ -27,6 +27,7 @@ package algorithms
 
 import (
 	"strconv"
+	"strings"
 	"testing"
 )
 
@@ -51,35 +52,31 @@ func TestLargestGoodInteger(t *testing.T) {
 		t.Errorf("Not correct. Got: %v Want: %v \n", got, want)
 	}
 }
+
 func largestGoodInteger(num string) string {
-	var sames []string
+	biggest := "0"
+	found := false
 
 	for i := 0; i < len(num)-2; i++ {
 		if num[i] == num[i+1] && num[i+1] == num[i+2] {
-			sames = append(sames, num[i:i+3])
+			found = true
+			biggest = maxStr(biggest, string(num[i]))
 		}
 	}
 
-	if len(sames) == 0 {
+	if found == false {
 		return ""
 	}
 
-	return largestGoodIntegerFindBigger(sames)
+	return strings.Repeat(biggest, 3)
 }
 
-func largestGoodIntegerFindBigger(nums []string) string {
-	max := 0
+func maxStr(num1, num2 string) string {
+	num1Int, _ := strconv.Atoi(num1)
+	num2Int, _ := strconv.Atoi(num2)
 
-	for j := 0; j < len(nums); j++ {
-		num, _ := strconv.Atoi(nums[j])
-		if max < num {
-			max = num
-		}
+	if num1Int > num2Int {
+		return num1
 	}
-
-	if max == 0 {
-		return "000"
-	}
-
-	return strconv.Itoa(max)
+	return num2
 }
